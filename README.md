@@ -1,10 +1,23 @@
-Polyline encoding and decoding lib using lossy compression.
+[![pub package](https://img.shields.io/badge/pub-1.1.0-blueviolet.svg)](https://pub.dev/packages/badges)
 
+# polyline.dart
 Polyline encoding is a lossy compression algorithm that allows you to 
-store a series of coordinates as a single string. Point coordinates 
-are encoded using signed values.
+store a series of coordinates as a single string.
 
-## Usage
+Polyline is a dart port of Google's Polyline Algorithm explained 
+[here](https://developers.google.com/maps/documentation/utilities/polylinealgorithm).
+Inspired by Mapbox's [polyline.js](https://github.com/mapbox/polyline).
+Compatible with Dart 2.
+
+
+# Installation 
+Add ```polyline: any``` to your pubspec.yaml.
+Then run:
+```shell script
+pub get
+```
+
+# Usage
 
 A simple usage example: <br>
 Two named constructors are provided Polyline.Decode and Polyline.Encode. <br>
@@ -48,6 +61,12 @@ void main() {
 
 }
 ```
+
+
+See
+
+## Documentation
+Api Documentation
 
 ## Features and bugs
 
