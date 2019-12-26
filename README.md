@@ -70,11 +70,11 @@ Api Documentation
 
 ## Development for v1.0.2
 Multiple flags for extended capabilities
-* [ ]Todo add merge polylines
-* [ ] Todo add merge multiple polylines
-* [ ] Todo add from geoJson
 * [X] add haversine
 * [X] add haversine distance
+* [ ] Todo add merge polylines
+* [ ] Todo add merge multiple polylines
+* [ ] Todo add from geoJson
 
 ## Features and bugs
 
