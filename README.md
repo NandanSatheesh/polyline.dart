@@ -6,13 +6,46 @@ are encoded using signed values.
 
 ## Usage
 
-A simple usage example:
+A simple usage example: <br>
+Two named constructors are provided Polyline.Decode and Polyline.Encode. <br>
+
+Calling Polyline.Encode will compute the ```encodedString``` and set the passed in coordinates
+to ```decodedCoords``` on the instance of Polyline so that each instance of Polyline  has access to the  correct encoded string 
+and subsequent decoded coordinates. Likewise, calling Polyline.Decode computes the list of coordinates from the
+encoded string and sets the passed in encoded string to the instance of Polyline.
+
+Note that a precision of 5 is standard.
 
 ```dart
 import 'package:polyline/polyline.dart';
 
-main() {
-  var awesome = new Awesome();
+void main() {
+  Polyline polyline;
+  const coordinates = [
+    [33.80119, -84.34788],
+    [35.10566, -80.8762],
+    [30.4526, -81.71116],
+    [28.57888, -81.2717]
+  ];
+  const precision = 5;
+  const encoded = 'mxhmEfeyaO}w}F_aeTrxk[nabDv}lJsytA';
+
+  // Encode a list of coordinates with precision 5 to produce the encoded string
+  polyline = Polyline.Encode(
+      decodedCoords: coordinates,
+      precision: 5
+  );
+  print('Encoded String: ${polyline.encodedString}');
+  print('Coords: ${polyline.decodedCoords}');
+
+  // Decode an encoded string to a list of coordinates
+  polyline = Polyline.Decode(
+      encodedString: encoded,
+      precision: precision
+  );
+  print('Decoded Coords: ${polyline.decodedCoords}');
+  print('String: ${polyline.encodedString}');
+
 }
 ```
 
@@ -20,4 +53,4 @@ main() {
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: http://example.com/issues/replaceme
+[tracker]: http://github.com/sashvoncurtis/polyline.dart/issues/new
