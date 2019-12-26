@@ -12,7 +12,7 @@ Compatible with Dart 2.
 
 
 # Installation 
-Add ```polyline: ^1.0.1``` to your pubspec.yaml.
+Add ```polyline: ^1.0.2``` to your pubspec.yaml.
 Then run:
 ```shell script
 pub get # flutter pub get
@@ -68,7 +68,7 @@ void main() {
 ## Documentation
 Api Documentation
 
-## Development for v1.0.2
+## Development for v1.0.3
 Multiple flags for extended capabilities
 * [X] add haversine
 * [X] add haversine distance
