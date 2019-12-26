@@ -1,7 +1,8 @@
-A library for Dart developers.
+Polyline encoding and decoding lib using lossy compression.
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+Polyline encoding is a lossy compression algorithm that allows you to 
+store a series of coordinates as a single string. Point coordinates 
+are encoded using signed values.
 
 ## Usage
 
