@@ -1,4 +1,4 @@
-[![pub package](https://img.shields.io/badge/pub-1.1.0-blueviolet.svg)](https://pub.dev/packages/badges)
+![Pub](https://img.shields.io/pub/v/polyline)
 
 # polyline.dart
 Polyline encoding is a lossy compression algorithm that allows you to 
@@ -11,10 +11,10 @@ Compatible with Dart 2.
 
 
 # Installation 
-Add ```polyline: any``` to your pubspec.yaml.
+Add ```polyline: ^1.0.0``` to your pubspec.yaml.
 Then run:
 ```shell script
-pub get
+pub get # flutter pub get
 ```
 
 # Usage

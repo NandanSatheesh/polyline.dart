@@ -1,7 +1,5 @@
 import 'dart:math';
 
-// TODO: Put public facing types in this file.
-
 /// Checks if you are awesome. Spoiler: you are.
 class Polyline {
   bool get isAwesome => true;
@@ -20,7 +18,6 @@ class Polyline {
     encodedString = encode_poly(decodedCoords, precision);
     decodedCoords = decodedCoords;
   }
-
 
   /// Decodes encoded polyline string to a [latitude, longitude] coordinates list.
   /// @decode_poly Function
@@ -44,7 +41,6 @@ class Polyline {
     // track of whether we've hit the end of the string. In each
     // loop iteration, a single coordinate is decoded.
     while (index < str.length) {
-
       // Reset shift, result, and byte
       byte = null;
       shift = 0;
@@ -78,16 +74,19 @@ class Polyline {
     return coordinates;
   }
 
-   /// Encodes the given [latitude, longitude] coordinates list to an encoded string.
-   /// @encode_poly Function
-   /// @param {List<dynamic>} coordinates
-   /// @param {int} precision
-   /// @returns {String}
+  /// Encodes the given [latitude, longitude] coordinates list to an encoded string.
+  /// @encode_poly Function
+  /// @param {List<dynamic>} coordinates
+  /// @param {int} precision
+  /// @returns {String}
   String encode_poly(List<List<double>> coordinates, int precision) {
-    if (coordinates.length == null) { return ''; }
+    if (coordinates.length == null) {
+      return '';
+    }
 
     int factor = pow(10, precision is int ? precision : 5);
-    var output = _encode(coordinates[0][0], 0, factor) + _encode(coordinates[0][1], 0, factor);
+    var output = _encode(coordinates[0][0], 0, factor) +
+        _encode(coordinates[0][1], 0, factor);
 
     for (var i = 1; i < coordinates.length; i++) {
       var a = coordinates[i], b = coordinates[i - 1];
@@ -98,14 +97,13 @@ class Polyline {
     return output;
   }
 
-
   /// Returns the character string
   /// @param {double} current
   /// @param {double} previous
   /// @param {int} factor
   /// @returns {String}
   String _encode(double current, double previous, int factor) {
-    final _current =  (current * factor).round();
+    final _current = (current * factor).round();
     final _previous = (previous * factor).round();
 
     var coordinate = _current - _previous;
@@ -122,6 +120,4 @@ class Polyline {
     output += String.fromCharCode(coordinate + 63);
     return output;
   }
-
 }
-// src: https://github.com/sashvoncurtis/polyline.dart  2019

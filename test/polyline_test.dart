@@ -12,10 +12,7 @@ void main() {
 
   group('Polyline.Decode', () {
     Polyline polyline;
-    polyline = Polyline.Decode(
-        encodedString: encoded_string,
-        precision: 5
-    );
+    polyline = Polyline.Decode(encodedString: encoded_string, precision: 5);
 
     test('Decoded coordinates are equal to decoded encodedString', () {
       expect(polyline.decodedCoords, decoded_coords);
@@ -28,10 +25,7 @@ void main() {
 
   group('Polyline.Encode', () {
     Polyline polyline;
-    polyline = Polyline.Encode(
-        decodedCoords: decoded_coords,
-        precision: 5
-    );
+    polyline = Polyline.Encode(decodedCoords: decoded_coords, precision: 5);
 
     test('polylineEncoded is equal to an encoded string', () {
       expect(polyline.encodedString, encoded_string);

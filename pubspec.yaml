@@ -1,5 +1,5 @@
 name: polyline
-description: Polyline encoding algorithm
+description: Polyline encoding algorithm for encoding and decoding a list of coordinates
 version: 1.0.0
 homepage: https://github.com/sashvoncurtis/polyline.dart
 author: sashnortier <sashnortier@gmail.com>
