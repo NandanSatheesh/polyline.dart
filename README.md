@@ -30,6 +30,9 @@ encoded string and sets the passed in encoded string to the instance of Polyline
 
 Note that a precision of 5 is standard.
 
+
+## 
+
 ```dart
 import 'package:polyline/polyline.dart';
 
@@ -62,19 +65,16 @@ void main() {
   print('Distance: ${polyline.distance.floor()}km , Encoded String: ${polyline.encodedString} Decoded Coords: ${polyline.decodedCoords}');
 ```
 
-
-See
-
 ## Documentation
 Api Documentation
 
-## Development 
+## Development for v1.0.2
 Multiple flags for extended capabilities
-* Todo add merge polylines
-* Todo add merge multiple polylines
-* Todo add from geoJson
-* Todo add haversine
-* Todo add haversine distance
+* [ ]Todo add merge polylines
+* [ ] Todo add merge multiple polylines
+* [ ] Todo add from geoJson
+* [X] add haversine
+* [X] add haversine distance
 
 ## Features and bugs
 
