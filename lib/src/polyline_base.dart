@@ -1,23 +1,52 @@
-import 'dart:math';
+import 'dart:math' show pow, sin, cos, pi, sqrt;
 
-/// Checks if you are awesome. Spoiler: you are.
+/*
+* Polyline Encoding Algorithm
+*
+* - Decode encoded polyline
+* - Encode polyline
+*
+* Todo add merge polylines
+* Todo add merge multiple polylines
+* Todo add from geoJson
+* Todo add haversine
+* Todo add haversine distance
+* Todo write tests
+* */
+
+
 class Polyline {
-  bool get isAwesome => true;
+  //  --- Instance Variables
+  bool get isPolyline => true;
   String encodedString;
   List<List<double>> decodedCoords = [];
   int precision;
+  double distance;
+  String unit = 'kilometers';
 
-  /// .Decode(str, p) named constructor
+  //  --- Named Constructors
+  /// .Decode(str, p)
   Polyline.Decode({this.encodedString, this.precision}) {
     decodedCoords = _decode(encodedString, precision);
     encodedString = encodedString;
   }
 
-  /// .Encode(coords, p) named constructor
+  /// .Encode(coords, p)
   Polyline.Encode({this.decodedCoords, this.precision}) {
-    encodedString = encode_poly(decodedCoords, precision);
+    encodedString = _encode_poly(decodedCoords, precision);
     decodedCoords = decodedCoords;
   }
+
+  // .Distance(str, u)
+  Polyline.Distance({this.encodedString, this.unit}) {
+    distance = _length(encodedString, unit);   // _length sets decodedCoords
+    encodedString = encodedString;
+  }
+
+
+
+
+  //  ------------- ENCODE & DECODE -------------
 
   /// Decodes encoded polyline string to a [latitude, longitude] coordinates list.
   /// @decode_poly Function
@@ -79,7 +108,7 @@ class Polyline {
   /// @param {List<dynamic>} coordinates
   /// @param {int} precision
   /// @returns {String}
-  String encode_poly(List<List<double>> coordinates, int precision) {
+  String _encode_poly(List<List<double>> coordinates, int precision) {
     if (coordinates.length == null) {
       return '';
     }
@@ -119,5 +148,74 @@ class Polyline {
     }
     output += String.fromCharCode(coordinate + 63);
     return output;
+  }
+
+
+  /// Calculate the distance of the polyline. If radius is not provided, distance is flat, else distance is haversine distance
+  /// NOTE: Support flat surface and sphere
+  /// @param {string} polyline - The polyline to calculate from
+  /// @param  String of 'meter' or 'kilometer' unit - returned unit value.
+  /// @return {double} length - unit based on options.radius unit
+  double _length(String polyline, String unit) {
+    List<List<double>> decodedPolyline;
+    decodedPolyline = _decode(polyline, 5);
+
+    // setting class instance vars
+    decodedCoords  = decodedPolyline;
+
+    double distanceOfDecoded = 0;
+    for (var i = 0; i < decodedPolyline.length - 1; i++) {
+      final lat = [decodedPolyline[i][0], decodedPolyline[i][1]];
+      final lon = [decodedPolyline[i + 1][0], decodedPolyline[i + 1][1]];
+
+      distanceOfDecoded += _haversineDistance(lat, lon);
+    }
+
+    if(unit == 'meter') return  distanceOfDecoded * 1000;
+    if(unit == 'kilometer') return distanceOfDecoded;
+
+    distance = distanceOfDecoded;
+    return distanceOfDecoded;
+  }
+
+  //  ------------- HAVERSINE -------------
+
+  /// Convert Degree to Radian
+  /// @param {double} deg - Degree
+  /// @return {double} Radia
+  double _degToRad(double deg) {
+    return (deg * pi) / 180;
+  }
+
+
+  /// Calculate haversine of a number
+  /// @param {double} number - input number
+  /// @return {double} haversine
+  double _haversine(double number) {
+    if(number == null) {
+      throw NullThrownError;
+    }
+    return pow(sin(number / 2), 2);
+  }
+
+
+   /// Calculate the haversine distance between 2 points
+   /// on the Earth, using radius of 6371 km
+   /// @param {List<double>} point1 - lat, lon are mandatory
+   /// @param {List<double>} point2 - lat, lon are mandatory
+   /// @return {double} distance
+  double _haversineDistance(List<double> _point1, List<double> _point2) {
+    _point1.map((item) => item != null ?  _degToRad(item) : throw NullThrownError);
+    _point2.map((item) => item != null ?  _degToRad(item) : throw NullThrownError);
+
+    const radius = 6371;
+    final point1 = [_point1[0], _point1[1] ];
+    final point2 = [_point2[0], _point2[1] ];
+
+    final a = _haversine(point2[0] - point1[0]);
+    final b = cos(point1[0]) * cos(point2[0]) * _haversine(point2[1] - point1[1]);
+    final distance = 2 * radius * sqrt(a + b);
+
+    return distance;
   }
 }

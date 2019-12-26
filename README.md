@@ -1,4 +1,5 @@
 ![Pub](https://img.shields.io/pub/v/polyline)
+<div style="text-align:center"><img height="89" src="./poly4PL.png" /></div>
 
 # polyline.dart
 Polyline encoding is a lossy compression algorithm that allows you to 
@@ -34,6 +35,8 @@ import 'package:polyline/polyline.dart';
 
 void main() {
   Polyline polyline;
+
+  /// List<List<double> coordinates;
   const coordinates = [
     [33.80119, -84.34788],
     [35.10566, -80.8762],
@@ -44,22 +47,19 @@ void main() {
   const encoded = 'mxhmEfeyaO}w}F_aeTrxk[nabDv}lJsytA';
 
   // Encode a list of coordinates with precision 5 to produce the encoded string
-  polyline = Polyline.Encode(
-      decodedCoords: coordinates,
-      precision: 5
-  );
-  print('Encoded String: ${polyline.encodedString}');
-  print('Coords: ${polyline.decodedCoords}');
+  polyline = Polyline.Encode(decodedCoords: coordinates, precision: 5);
+  print('Encoded String: ${polyline.encodedString}, Coords: ${polyline.decodedCoords}');
 
   // Decode an encoded string to a list of coordinates
-  polyline = Polyline.Decode(
-      encodedString: encoded,
-      precision: precision
-  );
+  polyline = Polyline.Decode(encodedString: encoded, precision: precision);
   print('Decoded Coords: ${polyline.decodedCoords}');
   print('String: ${polyline.encodedString}');
 
-}
+  // Calculate the distance of an encoded polyline, and decode the polyline
+  polyline =  Polyline.Distance(encodedString: encoded,  unit: 'kilometers');
+  // By calling  length the encodedString, decodedCoords, and distance variables
+  // of the Polyline class are available
+  print('Distance: ${polyline.distance.floor()}km , Encoded String: ${polyline.encodedString} Decoded Coords: ${polyline.decodedCoords}');
 ```
 
 
@@ -67,6 +67,14 @@ See
 
 ## Documentation
 Api Documentation
+
+## Development 
+Multiple flags for extended capabilities
+* Todo add merge polylines
+* Todo add merge multiple polylines
+* Todo add from geoJson
+* Todo add haversine
+* Todo add haversine distance
 
 ## Features and bugs
 
