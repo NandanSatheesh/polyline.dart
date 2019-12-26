@@ -11,7 +11,7 @@ Compatible with Dart 2.
 
 
 # Installation 
-Add ```polyline: ^1.0.0``` to your pubspec.yaml.
+Add ```polyline: ^1.0.1``` to your pubspec.yaml.
 Then run:
 ```shell script
 pub get # flutter pub get
