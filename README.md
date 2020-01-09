@@ -31,19 +31,19 @@ Calling Polyline.Encode will compute the ```encodedString``` and set the passed 
 to ```decodedCoords``` on the instance of Polyline so that each instance of Polyline  has access to the  correct encoded string and subsequent decoded coordinates. 
 ```dart
   Polyline polyline;
-  polyline = Polyline.Encode(decodedCoords: coordinates, precision: 5);
+  polyline = Polyline.Encode(decodedCoords: coordinates, precision: precision);
 ```
 
 #### Polyline.Decode
 Likewise, calling Polyline.Decode computes the list of coordinates from the
-encoded string and sets the passed in encoded string to the instance of Polyline.
+encoded string and sets the passed in ```encodedString``` and the calculated ```decodedCoords``` to the instance of Polyline.
 ```dart 
   Polyline polyline;
   polyline = Polyline.Decode(encodedString: encoded, precision: precision);
 ```
 
 #### Polyline.Distance
-Polyline.Distance calcuates the haversine distance of a polyline, this is the spherical distance adjusted for the Earth's radius and is not the flat distance. The encodedString is automatically decoded to calcualte the distance and such is available off the Polyline instance. Unit can either be 'kilometers' or 'meters'.
+Polyline.Distance calcuates the haversine distance of a polyline, this is the spherical distance adjusted for the Earth's radius and is not the flat distance. The ```encodedString``` is automatically decoded to calcualte the distance and as such is available off the Polyline instance aswell as ```distance```  and ```decodedCoords```. Unit can either be in 'kilometers' or 'meters'.
 ```dart
   Polyline polyline;
   polyline =  Polyline.Distance(encodedString: encoded,  unit: 'kilometers');
@@ -70,7 +70,7 @@ void main() {
   const encoded = 'mxhmEfeyaO}w}F_aeTrxk[nabDv}lJsytA';
 
   // Encode a list of coordinates with precision 5 to produce the encoded string
-  polyline = Polyline.Encode(decodedCoords: coordinates, precision: 5);
+  polyline = Polyline.Encode(decodedCoords: coordinates, precision: precision );
   print('Encoded String: ${polyline.encodedString}, Coords: ${polyline.decodedCoords}');
 
   // Decode an encoded string to a list of coordinates
@@ -105,6 +105,8 @@ Multiple flags for extended capabilities
 Please file feature requests and bugs at the [issue tracker][tracker].
 
 [tracker]: http://github.com/sashvoncurtis/polyline.dart/issues/new
+
+Pull requests welcome.
 
 ## MIT License
 ```
