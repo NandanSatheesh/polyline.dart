@@ -165,10 +165,10 @@ class Polyline {
 
     double distanceOfDecoded = 0;
     for (var i = 0; i < decodedPolyline.length - 1; i++) {
-      final lat = [decodedPolyline[i][0], decodedPolyline[i][1]];
-      final lon = [decodedPolyline[i + 1][0], decodedPolyline[i + 1][1]];
+      final point1 = [decodedPolyline[i][0], decodedPolyline[i][1]];
+      final point2 = [decodedPolyline[i + 1][0], decodedPolyline[i + 1][1]];
 
-      distanceOfDecoded += _haversineDistance(lat, lon);
+      distanceOfDecoded += _haversineDistance(point1, point2);
     }
 
     if(unit == 'meter') return  distanceOfDecoded * 1000;
@@ -205,12 +205,9 @@ class Polyline {
    /// @param {List<double>} point2 - lat, lon are mandatory
    /// @return {double} distance
   double _haversineDistance(List<double> _point1, List<double> _point2) {
-    _point1.map((item) => item != null ?  _degToRad(item) : throw NullThrownError);
-    _point2.map((item) => item != null ?  _degToRad(item) : throw NullThrownError);
-
     const radius = 6371;
-    final point1 = [_point1[0], _point1[1] ];
-    final point2 = [_point2[0], _point2[1] ];
+    final point1 = [_degToRad(_point1[0]), _degToRad(_point1[1]) ];
+    final point2 = [_degToRad(_point2[0]), _degToRad(_point2[1]) ];
 
     final a = _haversine(point2[0] - point1[0]);
     final b = cos(point1[0]) * cos(point2[0]) * _haversine(point2[1] - point1[1]);
