@@ -14,37 +14,43 @@ import 'dart:math' show pow, sin, cos, pi, sqrt;
 * Todo write tests
 * */
 
-
 class Polyline {
   //  --- Instance Variables
   bool get isPolyline => true;
-  String encodedString;
+  String? encodedString;
   List<List<double>> decodedCoords = [];
-  int precision;
-  double distance;
+  int? precision;
+  double? distance;
   String unit = 'kilometers';
 
   //  --- Named Constructors
   /// .Decode(str, p)
-  Polyline.Decode({this.encodedString, this.precision}) {
+  Polyline.Decode({
+    required String encodedString,
+    required int precision,
+  })  : encodedString = encodedString,
+        precision = precision {
     decodedCoords = _decode(encodedString, precision);
     encodedString = encodedString;
   }
 
   /// .Encode(coords, p)
-  Polyline.Encode({this.decodedCoords, this.precision}) {
+  Polyline.Encode({
+    required this.decodedCoords,
+    required int precision,
+  }) : precision = precision {
     encodedString = _encode_poly(decodedCoords, precision);
     decodedCoords = decodedCoords;
   }
 
   // .Distance(str, u)
-  Polyline.Distance({this.encodedString, this.unit}) {
-    distance = _length(encodedString, unit);   // _length sets decodedCoords
+  Polyline.Distance({
+    required String encodedString,
+    required this.unit,
+  }) : encodedString = encodedString {
+    distance = _length(encodedString, unit); // _length sets decodedCoords
     encodedString = encodedString;
   }
-
-
-
 
   //  ------------- ENCODE & DECODE -------------
 
@@ -59,10 +65,10 @@ class Polyline {
         lng = 0,
         shift = 0,
         result = 0,
-        byte,
         latitude_change,
         longitude_change,
-        factor = pow(10, precision is int ? precision : 5);
+        factor = pow(10, precision is int ? precision : 5) as int;
+    int? byte;
     // ignore: omit_local_variable_types
     List<List<double>> coordinates = [];
 
@@ -109,11 +115,11 @@ class Polyline {
   /// @param {int} precision
   /// @returns {String}
   String _encode_poly(List<List<double>> coordinates, int precision) {
-    if (coordinates.length == null) {
+    if (coordinates.isEmpty) {
       return '';
     }
 
-    int factor = pow(10, precision is int ? precision : 5);
+    int factor = pow(10, precision is int ? precision : 5) as int;
     var output = _encode(coordinates[0][0], 0, factor) +
         _encode(coordinates[0][1], 0, factor);
 
@@ -150,7 +156,6 @@ class Polyline {
     return output;
   }
 
-
   /// Calculate the distance of the polyline. If radius is not provided, distance is flat, else distance is haversine distance
   /// NOTE: Support flat surface and sphere
   /// @param {string} polyline - The polyline to calculate from
@@ -161,7 +166,7 @@ class Polyline {
     decodedPolyline = _decode(polyline, 5);
 
     // setting class instance vars
-    decodedCoords  = decodedPolyline;
+    decodedCoords = decodedPolyline;
 
     double distanceOfDecoded = 0;
     for (var i = 0; i < decodedPolyline.length - 1; i++) {
@@ -171,8 +176,8 @@ class Polyline {
       distanceOfDecoded += _haversineDistance(point1, point2);
     }
 
-    if(unit == 'meter') return  distanceOfDecoded * 1000;
-    if(unit == 'kilometer') return distanceOfDecoded;
+    if (unit == 'meter') return distanceOfDecoded * 1000;
+    if (unit == 'kilometer') return distanceOfDecoded;
 
     distance = distanceOfDecoded;
     return distanceOfDecoded;
@@ -187,30 +192,26 @@ class Polyline {
     return (deg * pi) / 180;
   }
 
-
   /// Calculate haversine of a number
   /// @param {double} number - input number
   /// @return {double} haversine
   double _haversine(double number) {
-    if(number == null) {
-      throw NullThrownError;
-    }
-    return pow(sin(number / 2), 2);
+    return pow(sin(number / 2), 2) as double;
   }
 
-
-   /// Calculate the haversine distance between 2 points
-   /// on the Earth, using radius of 6371 km
-   /// @param {List<double>} point1 - lat, lon are mandatory
-   /// @param {List<double>} point2 - lat, lon are mandatory
-   /// @return {double} distance
+  /// Calculate the haversine distance between 2 points
+  /// on the Earth, using radius of 6371 km
+  /// @param {List<double>} point1 - lat, lon are mandatory
+  /// @param {List<double>} point2 - lat, lon are mandatory
+  /// @return {double} distance
   double _haversineDistance(List<double> _point1, List<double> _point2) {
     const radius = 6371;
-    final point1 = [_degToRad(_point1[0]), _degToRad(_point1[1]) ];
-    final point2 = [_degToRad(_point2[0]), _degToRad(_point2[1]) ];
+    final point1 = [_degToRad(_point1[0]), _degToRad(_point1[1])];
+    final point2 = [_degToRad(_point2[0]), _degToRad(_point2[1])];
 
     final a = _haversine(point2[0] - point1[0]);
-    final b = cos(point1[0]) * cos(point2[0]) * _haversine(point2[1] - point1[1]);
+    final b =
+        cos(point1[0]) * cos(point2[0]) * _haversine(point2[1] - point1[1]);
     final distance = 2 * radius * sqrt(a + b);
 
     return distance;

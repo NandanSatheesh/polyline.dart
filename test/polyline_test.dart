@@ -49,7 +49,8 @@ void main() {
       ];
 
       var encodedPolyline =
-          Polyline.Encode(decodedCoords: route, precision: 5).encodedString;
+          Polyline.Encode(decodedCoords: route, precision: 5).encodedString ??
+              '';
 
       var distance =
           Polyline.Distance(encodedString: encodedPolyline, unit: 'kilometer')
