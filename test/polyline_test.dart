@@ -35,4 +35,29 @@ void main() {
       expect(polyline.decodedCoords, decoded_coords);
     });
   });
+
+  test(
+    'Test distance',
+    () {
+      var route = [
+        [45.534774, -122.698766],
+        [45.528371, -122.698528],
+        [45.528460, -122.695370],
+        [45.528460, -122.695371],
+        [45.528465, -122.694515],
+        [45.534865, -122.694746],
+      ];
+
+      var encodedPolyline =
+          Polyline.Encode(decodedCoords: route, precision: 5).encodedString ??
+              '';
+
+      var distance =
+          Polyline.Distance(encodedString: encodedPolyline, unit: 'kilometer')
+              .distance;
+
+      // 1.75km is distance calculate using measuring tool on google maps.
+      expect(distance, closeTo(1.75, 0.025));
+    },
+  );
 }
