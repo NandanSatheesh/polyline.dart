@@ -1,18 +1,20 @@
-![Pub](https://img.shields.io/pub/v/polyline) ![Dart](https://img.shields.io/badge/dart-2.2.0-orange) ![license](https://img.shields.io/github/license/sashvoncurtis/polyline.dart) <a href="http://spacemacs.org"><img src="https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg" alt="Made with Spacemacs"></a> 
+![Pub](https://img.shields.io/pub/v/polyline) ![Dart](https://img.shields.io/badge/dart-2.12.0-orange) ![license](https://img.shields.io/github/license/tnorbury/polyline.dart-2) 
 
+# polyline.dart 2
+This package is a fork/relauch of the [polyline package](https://pub.dev/packages/polyline) (GitHub link for that repo [here](https://github.com/NandanSatheesh/polyline.dart)).
+Much of the remained of this readme is from the original package...
 
-# polyline.dart
 Polyline encoding is a lossy compression algorithm that allows you to 
 store a series of coordinates as a single string.
 
 Polyline is a dart port of Google's Polyline Algorithm explained 
 [here](https://developers.google.com/maps/documentation/utilities/polylinealgorithm).
 Inspired by Mapbox's [polyline.js](https://github.com/mapbox/polyline).
-Compatible with Dart 2.
+Null Safe!
 
 
 # Installation 
-Add ```polyline: ^1.0.2``` to your pubspec.yaml.
+Add ```polyline: ^1.0.0``` to your pubspec.yaml.
 Then run:
 ```shell script
 pub get # flutter pub get

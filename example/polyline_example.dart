@@ -1,4 +1,4 @@
-import 'package:polyline/polyline.dart';
+import 'package:polyline_2/polyline_2.dart';
 
 void main() {
   Polyline polyline;
@@ -26,5 +26,5 @@ void main() {
   polyline =  Polyline.Distance(encodedString: encoded,  unit: 'kilometers');
   // By calling  length the encodedString, decodedCoords, and distance variables
   // of the Polyline class are available
-  print('Distance: ${polyline.distance.floor()}km , Encoded String: ${polyline.encodedString} Decoded Coords: ${polyline.decodedCoords}');
+  print('Distance: ${polyline.distance!.floor()}km , Encoded String: ${polyline.encodedString} Decoded Coords: ${polyline.decodedCoords}');
 }
