@@ -119,7 +119,7 @@ class Polyline {
       return '';
     }
 
-    int factor = pow(10, precision is int ? precision : 5) as int;
+    var factor = pow(10, precision is int ? precision : 5) as int;
     var output = _encode(coordinates[0][0], 0, factor) +
         _encode(coordinates[0][1], 0, factor);
 
@@ -168,7 +168,7 @@ class Polyline {
     // setting class instance vars
     decodedCoords = decodedPolyline;
 
-    double distanceOfDecoded = 0;
+    var distanceOfDecoded = 0.0;
     for (var i = 0; i < decodedPolyline.length - 1; i++) {
       final point1 = [decodedPolyline[i][0], decodedPolyline[i][1]];
       final point2 = [decodedPolyline[i + 1][0], decodedPolyline[i + 1][1]];
@@ -187,7 +187,7 @@ class Polyline {
 
   /// Convert Degree to Radian
   /// @param {double} deg - Degree
-  /// @return {double} Radia
+  /// @return {double} Radius
   double _degToRad(double deg) {
     return (deg * pi) / 180;
   }

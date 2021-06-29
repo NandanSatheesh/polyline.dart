@@ -1,4 +1,4 @@
-import 'package:polyline/polyline.dart';
+import 'package:polyline_2/polyline_2.dart';
 import 'package:test/test.dart';
 
 void main() {

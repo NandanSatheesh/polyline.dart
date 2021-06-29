@@ -1,14 +1,12 @@
-name: polyline
+name: polyline_2
 description: Polyline encoding algorithm for encoding and decoding a list of coordinates
-version: 1.0.2
-homepage: https://github.com/sashvoncurtis/polyline.dart
-author: sashnortier <sashnortier@gmail.com>
+version: 1.0.0
+homepage: https://github.com/TNorbury/polyline.dart-2
+repository: https://github.com/TNorbury/polyline.dart-2
+issue_tracker: https://github.com/TNorbury/polyline.dart-2
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
-
-#dependencies:
-#  path: ^1.4.1
 
 dev_dependencies:
   pedantic: ^1.0.0
